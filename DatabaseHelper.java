@@ -92,46 +92,30 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
-    // Replace String with Date object asap.
-    public  Cursor getTodayTasks(String date){
+    public  Cursor getTodoTask(String date, int status) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT * FROM " + TASK_TABLE_NAME,
-                new String[] {date});
+        return db.rawQuery("SELECT * FROM " + TASK_TABLE_NAME
+                        + " WHERE T_Date = ?" + " AND T_Status = ?",
+                new String[]{date, String.valueOf(status)});
     }
 
-    public  Cursor getEntireTaskTable(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT * FROM " + TASK_TABLE_NAME,
-                null);
-    }
-
-    public  Cursor getTodayTasksFromAList(String listname, String date){
+    public  Cursor getTaskByList(String listname, int status){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + TASK_TABLE_NAME
                         + " WHERE " + T_List + " = ?"
-                        + " AND " + T_Date + " = ?",
-                new String[] {listname, date});
+                        + " AND " + T_Status + " = ?",
+                new String[] {listname, String.valueOf(status)});
     }
 
-    public  Cursor getCompleteTaskOfList(String listname){
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT * FROM " + TASK_TABLE_NAME
-                        + " WHERE " + T_List + " = ?",
-                new String[] {listname});
-    }
-
-    public Cursor getThisDayIncompleteTasks(String date){
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT * FROM " + TASK_TABLE_NAME
-                        + " WHERE " + T_Status + " = 0"
-                        + " AND " + T_Date + " = ?",
-                new String[] {date});
-    }
-
-    public Cursor getList(int ID){
+    public Cursor getListByID(int ID){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + LIST_TABLE_NAME + " WHERE " + L_ID + " = ?",
                 new String[] {String.valueOf(ID)});
+    }
+
+    public Cursor getAllLists(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * FROM " + LIST_TABLE_NAME, null);
     }
 
     public Cursor editTask(int ID, String name, String des, String date, String list){
@@ -172,25 +156,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
-    /*
-    public Cursor showTaskData(){
+    public void deleteTaskbyID(int TaskID){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT * FROM " + TASK_TABLE_NAME, null);
-    }*/
-
-
-
-
-    public Cursor removeTask(int TaskID){
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("DELETE FROM " + TASK_TABLE_NAME
+        db.execSQL("DELETE FROM " + TASK_TABLE_NAME
                         + " WHERE " + T_ID + " = ?",
                 new String[] {String.valueOf(TaskID)});
     }
 
-    public Cursor removeList(int ListID){
+    public void deleteListbyID(int ListID){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("DELETE FROM " + LIST_TABLE_NAME
+        db.execSQL("DELETE FROM " + LIST_TABLE_NAME
                         + " WHERE " + L_ID + " = ?",
                 new String[] {String.valueOf(ListID)});
     }
