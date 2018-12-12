@@ -2,6 +2,9 @@ package com.example.violetang.navigationbuttom;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +12,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class personalInfoActivity extends AppCompatActivity {
     private ImageView editPage;
@@ -19,7 +27,9 @@ public class personalInfoActivity extends AppCompatActivity {
     private TextView nickname;
     private TextView email;
     private TextView instruction;
-
+    private ImageView image;
+    private Bitmap head;
+    private static String path = "/sdcard/DemoHead"; //sd path
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +64,7 @@ public class personalInfoActivity extends AppCompatActivity {
         nickname = (TextView) findViewById(R.id.personal_info_name);
         email = (TextView) findViewById(R.id.personal_info_email);
         instruction = (TextView) findViewById(R.id.personal_info_instruction);
+        image = (ImageView) findViewById(R.id.personal_info_image);
         myDB = new DatabaseHelper(this);
         cursor = myDB.showUserData();
         if (cursor.getCount() != 0) {
@@ -63,6 +74,10 @@ public class personalInfoActivity extends AppCompatActivity {
                 email.setText(cursor.getString(3));
                 instruction.setText(cursor.getString(4));
             }
+        }
+        head = BitmapFactory.decodeFile(path + "head.jpg");
+        if(head != null) {
+            image.setImageBitmap(head);
         }
     }
 

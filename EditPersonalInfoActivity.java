@@ -1,7 +1,18 @@
 package com.example.violetang.navigationbuttom;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -25,12 +36,17 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
     private EditText nickName; // edit area to enter or update nickname
     private EditText email; // edit area to enter or update email
     private EditText instruction; // edit area to enter or update instruction
-    private ImageView photo;
     private Button save; // Button to save information into database
     private String username; // string of username
     private String nickname; // string of nickname
     private String emailAddress; // string of email address
     private String instructions; // string of instruction
+
+    private ImageView image;
+    private Button camera;
+    private Button photo;
+    private Bitmap head;
+    private static String path = "/sdcard/DemoHead"; //sd path
 
     /**
      * Override onCreate method
@@ -39,7 +55,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_personal_info);
+        setContentView(R.layout.activity_edit_personal_info);
         goBack();
         initView();
         saveInfo();
@@ -66,7 +82,9 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
         nickName = (EditText) findViewById(R.id.edit_personal_info_name);
         email = (EditText) findViewById(R.id.edit_personal_info_email);
         instruction = (EditText) findViewById(R.id.edit_personal_info_instruction);
-        photo = (ImageView) findViewById(R.id.edit_personal_info_image);
+        image = (ImageView) findViewById(R.id.edit_personal_info_image);
+        camera = (Button) findViewById(R.id.edit_personal_camera);
+        photo = (Button) findViewById(R.id.edit_personal_photo);
         myDB = new DatabaseHelper(this); // initialize database
         cursor = myDB.showUserData(); // get data from database
         if (cursor.getCount()!= 0) { // if there's a user in the database
@@ -102,6 +120,35 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
                 instruction.getText().clear();
             }
         });
+        camera.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                try {
+                    Intent _camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    _camera.putExtra(MediaStore.EXTRA_OUTPUT,
+                            Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+                                    "head.jpg")));
+                    startActivityForResult(_camera,1);
+                }catch(Exception e){
+                    Toast.makeText(EditPersonalInfoActivity.this,
+                            "cannot start camera", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        photo.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent _photo = new Intent(Intent.ACTION_PICK, null);
+                _photo.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        "image/*");
+                startActivityForResult(_photo,2);
+            }
+        });
+
+        Bitmap bt = BitmapFactory.decodeFile(path + "head.jpg");
+        if(bt != null){
+            image.setImageBitmap(bt);
+        }else{
+
+        }
     }
 
     /**
@@ -137,5 +184,74 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
                 myDB.close();
             }
         });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        switch(requestCode){
+            case 1:
+                if(resultCode == RESULT_OK){
+                    File temp = new File(Environment.getExternalStorageDirectory()
+                            + "/head.jpg");
+                    cropPhoto(Uri.fromFile(temp));//crop photo
+                }
+                break;
+            case 2:
+                if(resultCode == RESULT_OK) {
+                    cropPhoto(data.getData());//crop photo
+                }
+                break;
+            case 3:
+                if(data != null){
+                    Bundle newImage = data.getExtras();
+                    head = newImage.getParcelable("data");
+                    if(head != null){
+                        setPicToView(head);
+                        image.setImageBitmap(head);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        super.onActivityResult(requestCode,resultCode,data);
+    }
+
+    public void cropPhoto(Uri uri){
+        Intent crop = new Intent("com.android.camera.action.CROP");
+        crop.setDataAndType(uri, "image/*");
+        crop.putExtra("crop", "true");
+        // aspectX aspectY
+        crop.putExtra("aspectX", 1);
+        crop.putExtra("aspectY", 1);
+        // outputX outputY
+        crop.putExtra("outputX", 50);
+        crop.putExtra("outputY", 50);
+        crop.putExtra("return-data", true);
+        startActivityForResult(crop, 3);
+    }
+
+    private void setPicToView(Bitmap mBitmap) {
+        String sdStatus = Environment.getExternalStorageState();
+        if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // check if sd is available
+            return;
+        }
+        FileOutputStream b = null;
+        File file = new File(path);
+        file.mkdirs();// create a file folder
+        String fileName = path + "head.jpg";// image name
+        try {
+            b = new FileOutputStream(fileName);
+            mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// write and compress the data
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                b.flush();
+                b.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
