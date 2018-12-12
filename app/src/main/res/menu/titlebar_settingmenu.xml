@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/titleBar_Setting_Pinfo"
+        android:icon="@drawable/ic_toolbar_pinfo"
+        android:title="@string/titleBar_Setting_Pinfo"
+        android:textSize = "8sp"/>
+    <item
+        android:id="@+id/titleBar_Setting_About"
+        android:icon="@drawable/ic_toolbar_about"
+        android:title="@string/titleBar_Setting_About"
+        android:textSize = "8sp"/>
+
+
+</menu>

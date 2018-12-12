@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".TaskFragment">
+
+        <include
+            android:id="@+id/list_toolbar"
+            layout="@layout/list_toolbar" />
+
+        <!-- TODO: Update blank fragment layout -->
+        <TextView
+            android:id="@+id/todoSec_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:text="@string/todoSectoer"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite" />
+
+        <ListView
+            android:id="@+id/tasklist_ListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true">
+
+        </ListView>
+
+        <ListView
+            android:id="@+id/completelist_ListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true">
+
+        </ListView>
+
+    </LinearLayout>
+</ScrollView>

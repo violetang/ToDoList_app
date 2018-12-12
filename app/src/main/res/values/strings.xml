@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">navigationButtom</string>
+    <string name="task">Task</string>
+    <string name="list">List</string>
+    <string name="calender">Calender</string>
+    <string name="sample">Sample</string>
+    <string name="todoSectoer">To do list</string>
+    <string name="completedSector">Completed</string>
+    <string name="taskDescription">Description</string>
+    <string name="today">Today</string>
+    <string name="yourlist">Your Lists</string>
+    <string name="Month">Months</string>
+    <string name="yourtask">Items</string>
+
+    <string name="taskItemMenuEdit">Edit</string>
+    <string name="taskItemMenuDelete">Delete</string>
+    <string name="taskItemMenuShare">Share</string>
+
+    <string name="titleBar_Setting_Pinfo">Account</string>
+    <string name="titleBar_Setting_Setting">Settings</string>
+    <string name="titleBar_Setting_About">About</string>
+
+    // about page part
+    <string name="about">About </string>
+    <string name="team"> Developers </string>
+    <string name="memebers"> Jiali Tang \n Thu Nguyen \n Runyu Xu\n Jack Wang\n </string>
+    <string name="github">https://www.google.com </string>
+    <string name="version"> Version 1.0.1 </string>
+
+    // personal information part
+    <string name="personal">Personal Information</string>
+    <string name="nickName">nick name</string>
+    <string name="email">example@gmail.com</string>
+    <string name="instruction">Personal instruction </string>
+
+    <string name="setting">This a setting page, more stuff will be added</string>
+
+    <string name="add_task">New task</string>
+    <string name="addtask_info_LinearLayout">addtask_info_LinearLayout</string>
+
+    <string-array name="taskItems">
+        <item>homework</item>
+        <item>grocery</item>
+        <item>work</item>
+    </string-array>
+
+    <string-array name="taskItemsCompleted">
+        <item>Eroll calss</item>
+        <item>fix car</item>
+    </string-array>
+
+    <string-array name="taskDescriptionCompleted">
+        <item>Next semester</item>
+        <item>braker</item>
+    </string-array>
+
+    <string-array name="taskDescription">
+        <item>cs421</item>
+        <item>apple orange</item>
+        <item>8 hours</item>
+    </string-array>
+
+    <string-array name="myList">
+        <item>Grocery</item>
+        <item>Courses</item>
+        <item>Life</item>
+    </string-array>
+
+    <string-array name="taskDate">
+        <item>11/22/2018</item>
+        <item>11/1/2018</item>
+        <item>11/11/2018</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

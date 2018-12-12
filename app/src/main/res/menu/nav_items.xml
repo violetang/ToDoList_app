@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_task"
+        android:icon="@drawable/ic_action_task"
+        android:title="@string/task" />
+    <item
+        android:id="@+id/nav_list"
+        android:icon="@drawable/ic_action_list"
+        android:title="@string/list" />
+    <item
+        android:id="@+id/nav_calender"
+        android:icon="@drawable/ic_action_calendar"
+        android:title="@string/calender" />
+</menu>
