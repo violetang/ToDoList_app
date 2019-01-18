@@ -24,13 +24,14 @@ public class MainActivity extends AppCompatActivity {
     private ListFragment listFragment;
     private calenderFragment calenderFragment;
 
-    DatabaseHelper myDB;
+    DatabaseHelper myDB;    //SQLite database
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //match the component in layout files
         mainNav =(BottomNavigationView) findViewById(R.id.main_nav);
         mainFrame = (FrameLayout) findViewById(R.id.main_frame);
 
@@ -38,10 +39,12 @@ public class MainActivity extends AppCompatActivity {
         listFragment = new ListFragment();
         calenderFragment = new calenderFragment();
 
-        myDB = new DatabaseHelper(this);
+        myDB = new DatabaseHelper(this);    //check DatabaseHelper.java
 
         setFragment(taskFragment);
 
+        //Buttom navigation Selected Listerner
+        //set the tabs corresponding to the fragment
         mainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -65,10 +68,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
+    ////set current fragment
     private void setFragment(Fragment fragment) {
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
