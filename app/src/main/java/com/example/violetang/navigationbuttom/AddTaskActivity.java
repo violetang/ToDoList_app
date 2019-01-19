@@ -19,6 +19,10 @@ import android.widget.Toast;
 import android.text.format.DateFormat;
 import java.util.Calendar;
 
+/**
+ * todo: datePickerDialog format should change
+ */
+
 public class AddTaskActivity extends AppCompatActivity {
     private String task_name;
     private String task_des;
@@ -26,7 +30,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
     private Button btnClear;
     private Button btnDone;
-    private Button btnTest;
+    //private Button btnTest;
 
     EditText tname, tdes;
 
@@ -128,7 +132,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 DatePickerDialog dialog = new DatePickerDialog(
                         AddTaskActivity.this, android.R.style.Theme_Material_Light,
                         myDateSetListener, year, month, day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
         });

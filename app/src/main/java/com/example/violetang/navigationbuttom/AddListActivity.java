@@ -52,7 +52,7 @@ public class AddListActivity extends AppCompatActivity {
         btnDone = (Button)findViewById(R.id.addlist_Done);
         IconBack = (ImageView)findViewById(R.id.addlist_toolbar_back);
 
-        // btnTest = (Button)findViewById(R.id.addlist_test);
+        // btnTest = (Button)findViewById(R.id.addlist_test); //for test
 
         addList();
         viewClear();
