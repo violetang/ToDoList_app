@@ -50,6 +50,7 @@
         android:layout_below="@+id/taskCheckBox"
         android:textSize="15sp"
         android:textStyle="italic"
+        android:textColor="@color/colorDarkGray"
         android:text="@string/taskDescription" />
 
     <!--
