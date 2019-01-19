@@ -23,8 +23,8 @@
     // about page part
     <string name="about">About </string>
     <string name="team"> Developers </string>
-    <string name="memebers"> Jiali Tang \n Thu Nguyen \n Runyu Xu\n Jack Wang\n </string>
-    <string name="github">https://www.google.com </string>
+    <string name="memebers"> Jiali Tang \n Runyu Xu\n Thu Nguyen \n Jack Wang\n </string>
+    <string name="github">https://github.com/violetang/ToDoList_app</string>
     <string name="version"> Version 1.0.1 </string>
 
     // personal information part

@@ -21,9 +21,10 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="ToDO List"
-        android:textColor="@color/colorAccent"
-        android:textSize="40dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="ChopChop TodoList"
+        android:textColor="@color/colorWhite"
+        android:textSize="35dp"
         android:textStyle="normal|bold" />
 
     <TextView
@@ -41,7 +42,7 @@
         android:layout_height="wrap_content"
         android:text="@string/memebers"
         android:textAlignment="center"
-        android:textColor="@color/colorDarkBlue"
+        android:textColor="@color/colorAccent"
         android:textSize="25dp" />
     <TextView
         android:id="@+id/url"
@@ -49,8 +50,8 @@
         android:layout_height="wrap_content"
         android:text="@string/github"
         android:textAlignment="center"
-        android:textSize="25dp"
-        android:textColor="@color/colorDarkBlue"
+        android:textSize="18dp"
+        android:textColor="@color/colorDarkGray"
 
         />
     <TextView
@@ -58,7 +59,7 @@
         android:layout_height="wrap_content"
         android:text="@string/version"
         android:textAlignment="center"
-        android:textColor="@color/colorDarkBlue"
-        android:textSize="25dp" />
+        android:textColor="@color/colorDarkGray"
+        android:textSize="20dp" />
 
 </LinearLayout>
