@@ -19,6 +19,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * Author: Jiali
+ * Date: Nov. 2018
+ * Description: task detail class for list fragment
+ * not be used yet
+ */
 public class ItemDetail_List extends AppCompatActivity {
 
     private DatabaseHelper myDB;

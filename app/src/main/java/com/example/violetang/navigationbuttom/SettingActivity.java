@@ -4,6 +4,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+/**
+ * Author: Jiali
+ * Date: Nov. 2018
+ * Description: didn't use, save for future development
+ */
 public class SettingActivity extends AppCompatActivity {
 
     @Override

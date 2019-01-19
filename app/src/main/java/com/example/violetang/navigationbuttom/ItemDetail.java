@@ -18,6 +18,11 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 
+/**
+ * Author: Jiali
+ * Date: Nov. 2018
+ * Description: task detail class
+ */
 public class ItemDetail extends AppCompatActivity {
 
     private DatabaseHelper myDB;

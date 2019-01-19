@@ -18,6 +18,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * Author: Jiali
+ * Date: Nov. 2018
+ * Description: add task in list fragment
+ */
 public class ListAddTask extends AppCompatActivity {
     private String task_name;
     private String task_des;

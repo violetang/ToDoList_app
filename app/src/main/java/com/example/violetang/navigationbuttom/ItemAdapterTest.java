@@ -19,6 +19,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * Author: Jiali
+ * Date: Nov. 2018
+ * Description: ItemAdapter for tasks' listview
+ */
 public class ItemAdapterTest extends BaseAdapter {
 
     LayoutInflater mInflater;

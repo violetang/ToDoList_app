@@ -11,6 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Author: Jiali
+ * Date: Nov. 2018
+ * Description: list detail class
+ */
 public class ListDetail extends AppCompatActivity {
 
     private DatabaseHelper myDB;

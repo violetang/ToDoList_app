@@ -13,6 +13,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * Author: Jiali
+ * Date: Nov. 2018
+ * Description: List Adapter for lists listview
+ */
 public class ListAdapter extends BaseAdapter {
 
     LayoutInflater mInflater;
