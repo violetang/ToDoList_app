@@ -29,7 +29,12 @@ import java.util.List;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ *  Author: Jiali
+ *  Date: Nov. 2018
+ *  Description: ListFragment class
+ *  Todo: 1.listview need update right after(haven't solve yet)
+ *        2.task click action
+ *        3.selected list changes color
  */
 public class ListFragment extends Fragment {
 
@@ -58,6 +63,7 @@ public class ListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        //initialize and match layout
         myDB = new DatabaseHelper(getActivity());
 
         Resources res =getResources();
@@ -67,13 +73,13 @@ public class ListFragment extends Fragment {
 
         //Tool bar
         setting = (ImageView)view.findViewById(R.id.listbar_setting);
-        setting();
+        setting(); //setting icon clickListener
 
         addNewTask = (ImageView)view.findViewById(R.id.listbar_addNewList);
-        addListTask();
+        addListTask();  //addtask icon clickListener
 
         addList =(ImageView)view.findViewById(R.id.addlist_imageview);
-        addlist();
+        addlist();  //addlist icon clickListener
 
         //right task bar
         tasksOfTheList_todo = (ListView)view.findViewById(R.id.taskBartodo_ListView);
@@ -81,7 +87,7 @@ public class ListFragment extends Fragment {
 
         //left list Bar
         listBar = (ListView)view.findViewById(R.id.listNavBar);
-        listbarCreated(listBar);
+        listbarCreated(listBar); //the list of lists
 
         //listviewClicksetting(tasksOfTheList_todo,list_ID,0);
         //listviewClicksetting(getTasksOfTheList_complete,list_ID,1);
@@ -199,6 +205,7 @@ public class ListFragment extends Fragment {
         listItemAdapter = new ListAdapter(MyApplication.getAppContext(),myListId,list_Name);
         listItems.setAdapter(listItemAdapter);
 
+        //list longpress listener
         listItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -212,6 +219,8 @@ public class ListFragment extends Fragment {
             }
         });
 
+        //list click listener
+        //click the list --> show corresponding list of tasks
         listItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -238,8 +247,7 @@ public class ListFragment extends Fragment {
                 tasksOfTheList_todo.setAdapter(taskItemAdapter);
                 setDynamicHeight(tasksOfTheList_todo); //set dynmic height for listview
 
-                listviewClicksetting(tasksOfTheList_todo,list_ID,0);
-
+                //listviewClicksetting(tasksOfTheList_todo,list_ID,0); //click to-do task action
 
                 final ArrayList<Integer> ComTasksId = new ArrayList<>();
                 ArrayList<String> completeTask = new ArrayList<>();
@@ -258,6 +266,8 @@ public class ListFragment extends Fragment {
                 getTasksOfTheList_complete.setAdapter(taskItemAdapter2);
                 setDynamicHeight(getTasksOfTheList_complete); //set dynmic height for listview
 
+                //listviewClicksetting(getTasksOfTheList_complete,list_ID,1); //click complete task action
+
                 /*
                 getTasksOfTheList_complete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -275,6 +285,7 @@ public class ListFragment extends Fragment {
 
     }
 
+    //click the task, jump to the task detail page
     public void listviewClicksetting(ListView temp, final int listID, final int status){
 
         temp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -291,7 +302,7 @@ public class ListFragment extends Fragment {
 
                 int taskid = TasksId.get(position);
 
-                Toast.makeText(MyApplication.getAppContext(), "task" + taskid + "Clicked", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MyApplication.getAppContext(), "task" + taskid + "Clicked", Toast.LENGTH_LONG).show();
                 Intent task_detail = new Intent(view.getContext(), ItemDetail_List.class);
                 task_detail.putExtra("LIST_TASK_ID",taskid);
                 startActivity(task_detail);
