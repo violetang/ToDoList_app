@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Author: Runyu Xu
+ * Date: Nov. 2018
+ */
 public class AboutActivity extends AppCompatActivity {
 
     @Override

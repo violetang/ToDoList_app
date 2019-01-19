@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Author: Runyu Xu
+ * Date: Nov. 2018
+ */
 public class personalInfoActivity extends AppCompatActivity {
     private ImageView editPage;
     private ImageView goBack;

@@ -24,7 +24,8 @@ import java.util.Calendar;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Author: Runyu Xu
+ * Date: Nov. 2018
  */
 public class calenderFragment extends Fragment {
 

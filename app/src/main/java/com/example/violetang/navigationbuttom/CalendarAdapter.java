@@ -14,6 +14,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Author: Runyu Xu
+ * Date: Nov. 2018
+ */
 public class CalendarAdapter extends BaseAdapter {
 
     LayoutInflater mInflater;

@@ -20,6 +20,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * Author: Runyu Xu
+ * Date: Nov. 2018
+ */
 public class EditPersonalInfoActivity extends AppCompatActivity {
 
     private DatabaseHelper myDB; // database name
