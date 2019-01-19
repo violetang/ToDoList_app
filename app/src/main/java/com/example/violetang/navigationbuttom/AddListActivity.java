@@ -12,6 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ Author: Jiali
+ Date: Nov. 2018
+ Description: Add List
+ */
 public class AddListActivity extends AppCompatActivity {
     private String list_name;
     private String list_des;

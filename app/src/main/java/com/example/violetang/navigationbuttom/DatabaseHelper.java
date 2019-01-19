@@ -6,10 +6,18 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * Author: Jiali & Jack
+ * Date: Nov. 2018
+ * Description: SQLite - create tables, queries
+ */
+
 public class DatabaseHelper extends SQLiteOpenHelper{
 
-    private static final String DATABASE_NAME = "todo.db";
+    private static final String DATABASE_NAME = "todo.db"; // Create the database
 
+
+    //Task table: id,name,des, date, status, list
     private static final String TASK_TABLE_NAME = "task_table";
     private static final String TASK_COL0_ID= "ID";
     private static final String TASK_COL1_NAME= "NAME";
@@ -28,6 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                     TASK_COL5_LIST+" INTEGER );";
 
 
+    //List table
     private static final String LIST_TABLE_NAME = "list_table";
     private static final String L_ID = "L_ID";
     private static final String L_Name = "L_NAME";
@@ -39,6 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                     L_Name+ " TEXT NOT NULL, "+
                     L_Desc+" TEXT );";
 
+    //person table
     private static final String PERSON_TABLE_NAME = "person_table";
     private static final String PERSON_INFO_ID ="ID";
     private static final String PERSON_INFO_USER = "USERNAME";
@@ -59,6 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         super(context, DATABASE_NAME, null, 1);
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(create_task_table_statement);
@@ -75,7 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    //parameter can be a task object
+    //Add task by name, des, date
     public boolean addTaskData( String name, String des, String date){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -93,6 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
+    //Add task by name, des, list_id
     public boolean addTaskInList( String name, String des, int list_id){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -110,6 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
+    //Get task by date and status
     public Cursor getTaskbyDate(String date, int status){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM "+ TASK_TABLE_NAME +
@@ -118,6 +131,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 new String[]{date, String.valueOf(status)});
     }
 
+    //get task by id
     public Cursor getTaskbyId(int index){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+
@@ -127,6 +141,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return cursor;
     }
 
+    //delete task by id
     public void deleteTaskbyId(int index){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM "
@@ -135,6 +150,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 new String[] {String.valueOf(index)});
     }
 
+    //update task without list
     public void updateTaskByIdNoList(int index, String name, String des, String date){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE "
@@ -146,6 +162,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 new String[] {name, des, date, String.valueOf(index)});
     }
 
+    //update task with list
     public void updateTaskByIdWithList(int index, String name, String des, int list){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE "
@@ -157,7 +174,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 new String[] {name, des, String.valueOf(list), String.valueOf(index)});
     }
 
-
+    //Add list
     public boolean addListData( String name, String des ){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -172,12 +189,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
+    //return lists
     public Cursor getLists(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+LIST_TABLE_NAME, null);
         return cursor;
     }
 
+    //return list by id
     public Cursor getListById(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+
@@ -188,6 +207,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     }
 
+    //delete list by id
     public void deleteListbyId(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM "
@@ -196,6 +216,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 new String[] {String.valueOf(id)});
     }
 
+    //update list by id
     public void updateListById(int id, String name, String des){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE "
@@ -207,6 +228,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
 
+    //get task by list_id and status
     public  Cursor getTaskByList(int listid, int status){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM "+ TASK_TABLE_NAME +
@@ -222,7 +244,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
 
-
+    //change task status to 1
     public void setTaskComplete(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + TASK_TABLE_NAME
@@ -231,6 +253,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                     new String[] {String.valueOf(id)});
     }
 
+    //change task status to 0
     public void setTaskIncomplete(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + TASK_TABLE_NAME
@@ -255,12 +278,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
+    //return person info
     public Cursor showUserData(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor user_data = db.rawQuery("SELECT * FROM "+PERSON_TABLE_NAME, null);
         return user_data;
     }
 
+    //update user info
     public void updateUserInfo(int index, String userName, String nickName, String email, String instruction){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE "

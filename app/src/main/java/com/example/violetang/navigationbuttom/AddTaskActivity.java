@@ -20,8 +20,13 @@ import android.text.format.DateFormat;
 import java.util.Calendar;
 
 /**
- * todo: datePickerDialog format should change
+     Author: Jiali
+     Date: Nov. 2018
+     Description: Add new task with a date
+ todo: datePickerDialog format should change
  */
+
+
 
 public class AddTaskActivity extends AppCompatActivity {
     private String task_name;
