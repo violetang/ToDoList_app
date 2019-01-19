@@ -24,19 +24,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * A simple {@link Fragment} subclass.
+ *  Author: Jiali
+ *  Date: Nov. 2018
+ *  Description: TaskFragment class
  */
 public class TaskFragment extends Fragment {
 
-    ListView myToDoTasksList;
-    ListView myComTasksList;
+    ListView myToDoTasksList;   //to do task list
+    ListView myComTasksList;    // complete task list
 
-    ImageView tasktoolBarSetting;
-    ImageView tasktoolbarAdd;
+    ImageView tasktoolBarSetting;   //setting icon
+    ImageView tasktoolbarAdd;   //add task icon
 
-    DatabaseHelper myDB;
+    DatabaseHelper myDB;    //SQLite database
 
-    ItemAdapterTest taskItemAdapter;
+    ItemAdapterTest taskItemAdapter;    //TaskList item Adapter
 
     public TaskFragment() {
         // Required empty public constructor
@@ -46,6 +48,7 @@ public class TaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        //initialize
         Resources res =getResources();
         View view = inflater.inflate(R.layout.fragment_task, container, false);
 
@@ -74,66 +77,56 @@ public class TaskFragment extends Fragment {
             }
         });
 
-            /*======================================================================================
-            * Setting icon
-            * User click Setting icon, show a setting menu.
-            * click items of the menu, go to corresponing pages.
-            ======================================================================================*/
+        /*======================================================================================
+        * Setting icon
+        * User click Setting icon, show a setting menu.
+        * click items of the menu, go to corresponing pages.
+        ======================================================================================*/
         tasktoolBarSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                switch (v.getId()) {
-                    case R.id.listbar_setting:
+                PopupMenu popup = new PopupMenu(MyApplication.getAppContext(), v);
+                popup.getMenuInflater().inflate(R.menu.titlebar_settingmenu, popup.getMenu());
+                popup.show();
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.titleBar_Setting_Pinfo:
+                                Intent PersonInfo_Intent = new Intent(tasktoolBarSetting.getContext(),personalInfoActivity.class);
+                                startActivity(PersonInfo_Intent);
+                                break;
 
-                        PopupMenu popup = new PopupMenu(MyApplication.getAppContext(), v);
-                        popup.getMenuInflater().inflate(R.menu.titlebar_settingmenu, popup.getMenu());
-                        popup.show();
-                        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                            @Override
-                            public boolean onMenuItemClick(MenuItem item) {
-                                switch (item.getItemId()) {
-                                    case R.id.titleBar_Setting_Pinfo:
-                                        Intent PersonInfo_Intent = new Intent(tasktoolBarSetting.getContext(),personalInfoActivity.class);
-                                        startActivity(PersonInfo_Intent);
-                                        break;
+                            case R.id.titleBar_Setting_About:
+                                Intent About_Intent = new Intent(tasktoolBarSetting.getContext(), AboutActivity.class);
+                                startActivity(About_Intent);
+                                break;
 
-                                    case R.id.titleBar_Setting_About:
-                                        Intent About_Intent = new Intent(tasktoolBarSetting.getContext(), AboutActivity.class);
-                                        startActivity(About_Intent);
-                                        break;
-
-                                    default:
-                                        break;
-                                }
-                                return true;
-                            }
-                        });
-                        break;
-                    default:
-                        break;
-                }
+                            default:
+                                break;
+                        }
+                        return true;
+                    }
+                });
             }
         });
-
         return view;
     }
 
-
     @Override
     public void onResume(){
-
         super.onResume();
-        listViewCreate(myToDoTasksList,0);
-        listViewCreate(myComTasksList,1);
+        listViewCreate(myToDoTasksList,0); //update the listview
+        listViewCreate(myComTasksList,1);   //update the listview
         taskItemAdapter.notifyDataSetChanged();
 
     }
 
     /*======================================================================================
-     * Make the listview dynamic
-     * enable two listview in one page
-     ======================================================================================*/
+     * Make the listview has dynamic size
+     * enable two listviews in one page
+    ======================================================================================*/
     public static void setDynamicHeight(ListView listView) {
         ItemAdapterTest adapter = (ItemAdapterTest)listView.getAdapter();
         //check adapter if null
@@ -173,6 +166,7 @@ public class TaskFragment extends Fragment {
 
         String task_date = m+d+y;
 
+        //select the tasks from database by date
         Cursor todo_task_data = myDB.getTaskbyDate(task_date,status);
         while(todo_task_data.moveToNext()) {
             taskId.add(todo_task_data.getInt(0));
@@ -185,6 +179,7 @@ public class TaskFragment extends Fragment {
         temp.setAdapter(taskItemAdapter);
         setDynamicHeight(temp); //set dynmic height for listview
 
+        //task clickListener
         temp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

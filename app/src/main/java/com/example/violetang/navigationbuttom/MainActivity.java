@@ -12,7 +12,7 @@ import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    /*
+    /**
         Author: Jiali
         Date: Nov. 2018
         Description: MainActivity, using BottomNavigationView and FrameLayout, Users can click
